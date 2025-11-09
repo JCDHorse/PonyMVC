@@ -1,0 +1,52 @@
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    font-size: 16px;
+}
+
+/*main {*/
+/*    width: 95%;*/
+/*}*/
+
+/*@media (min-width: 600px) {*/
+/*    main {*/
+/*        width: 80%;*/
+/*        margin: 0 auto;*/
+/*    }*/
+/*}*/
+
+/*h1 {*/
+/*    color: #333;*/
+/*    font-size: 2.3rem;*/
+/*}*/
+
+/*#ponies-container {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    justify-content: center;*/
+/*    gap: 15px;*/
+/*}*/
+
+/*.pony-item {*/
+/*    width: 300px;*/
+/*    height: 300px;*/
+/*    border: 2px solid #ccc;*/
+/*    border-radius: 15%;*/
+/*    padding: 20px;*/
+/*}*/
+
+/*@media (max-width: 500px) {*/
+/*    .pony-item {*/
+/*        height: 200px;*/
+/*        width: 250px;*/
+/*    }*/
+/*}*/
+
+
+/*.pony-item img {*/
+/*    object-fit: contain;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*}*/
