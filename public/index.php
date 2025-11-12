@@ -2,7 +2,6 @@
 
 require_once __DIR__ . '/../src/core/loader.php';
 
-use controllers\HomeController;
 
 // Test database access
 $pdo = null;
@@ -11,32 +10,33 @@ try {
         'pony',
         'ponypass',
         array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 }
 catch (PDOException $e) {
+    // If we can't cnnect to the database, return a JSON error message and stop execution
     die(json_encode(array('outcome' => false, 'message' => $e->getMessage())));
 }
 
 \models\ModelFactory::init($pdo);
 
-$routes = [
-    'GET' => [
-        '/' => [HomeController::class, 'getIndex'],
-    ],
-];
-
 $url = $_GET['url'] ?? '/';
 $method = $_SERVER["REQUEST_METHOD"];
 
-$controllerClass = $routes[$method][$url][0] ?? null;
-$handlerMethod = $routes[$method][$url][1] ?? null;
+$homeController = new \controllers\HomeController();
+$ponyController = new \controllers\PonyController();
 
-if (!$controllerClass || !$handlerMethod) {
-    http_response_code(404);
-    echo "404 Not Found";
-    exit;
+$router = new \core\Router(new \controllers\ErrorController());
+$router->addRoute("GET", "/", [$homeController, 'getIndex']);
+$router->addRoute("GET", "/pony/{id}", [$ponyController, 'getPony']);
+$router->addRoute("POST", "/pony", [$ponyController, 'newPony']);
+$router->addRoute("DELETE", "/pony/{id}", [$ponyController, 'deletePony']);
+
+
+$response = $router->dispatch($method, $url);
+if ($response->getResponseCode() >= 300 && $response->getResponseCode() < 400) {
+    header("Location: {$response->getResponse()}");
+    return;
 }
-
-$controller = new $controllerClass;
-
-call_user_func([$controller, $handlerMethod]);
+http_response_code($response->getResponseCode());
+echo $response->getResponse();
 

@@ -2,11 +2,13 @@
 
 namespace models;
 
+use PDO;
+
 class ModelFactory
 {
-    private static \PDO $pdo;
+    private static PDO $pdo;
 
-    public static function init(\PDO $pdo): void
+    public static function init(PDO $pdo): void
     {
         self::$pdo = $pdo;
     }

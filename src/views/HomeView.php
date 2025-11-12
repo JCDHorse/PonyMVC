@@ -5,9 +5,8 @@ namespace views;
 class HomeView extends View
 {
 
-    public function render(array $params): string
+    public function render(array $views, array $params): string
     {
-        $ponyView = new PonyView();
         ob_start();
         ?>
         <!doctype html>
@@ -22,7 +21,9 @@ class HomeView extends View
         <body>
             <main class="container mx-auto px-4 py-4 py-6">
                 <h1 class="text-4xl">Hello, World</h1>
-                <?= $ponyView->render($params) ?>
+                <? foreach ($views as $view): ?>
+                    <?= $view->render([], $params) ?>
+                <? endforeach ?>
             </main>
         </body>
         </html>
