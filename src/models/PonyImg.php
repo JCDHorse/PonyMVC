@@ -1,8 +1,8 @@
 <?php
 
-namespace models;
+namespace PonyMVC\models;
 
-use models\Model;
+use PonyMVC\models\Model;
 
 class PonyImg extends Model
 {
@@ -29,7 +29,7 @@ class PonyImg extends Model
 
     public function delete(int $id): bool {
         $stmt = $this->prepare("DELETE FROM ponies WHERE id = :id");
-        $stmt->bindParam('id', $id, \PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->rowCount() === 1;
     }

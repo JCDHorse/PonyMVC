@@ -1,9 +1,9 @@
 <?php
 
-namespace core;
+namespace PonyMVC\core;
 
-use controllers\ControllerResponse;
-use controllers\ErrorController;
+use PonyMVC\controllers\ControllerResponse;
+use PonyMVC\controllers\ErrorController;
 
 class Router
 {
@@ -35,10 +35,6 @@ class Router
                 array_shift($matches);
                 $response = call_user_func_array($handler, $matches);
                 if ($response->getResponseCode() !== 200) {
-                    if ($response->getResponseCode() >= 300 && $response->getResponseCode() < 400) {
-                        header("Location: {$response->getResponse()}");
-                        return $response;
-                    }
                     return $this->errorController->getError(
                         $response->getResponseCode(),
                         $response->getResponse()

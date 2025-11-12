@@ -1,6 +1,6 @@
 <?php
 
-namespace views;
+namespace PonyMVC\views;
 
 class HomeView extends View
 {

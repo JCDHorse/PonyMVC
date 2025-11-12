@@ -1,12 +1,12 @@
 <?php
 
 
-namespace controllers;
+namespace PonyMVC\controllers;
 
-use models\ModelFactory;
-use models\PonyImg;
-use views\HomeView;
-use views\PonyView;
+use PonyMVC\models\ModelFactory;
+use PonyMVC\models\PonyImg;
+use PonyMVC\views\HomeView;
+use PonyMVC\views\PonyView;
 
 class HomeController extends Controller
 {

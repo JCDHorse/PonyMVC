@@ -1,8 +1,8 @@
 <?php
 
-namespace views;
+namespace PonyMVC\views;
 
-use views\View;
+use PonyMVC\views\View;
 
 class ErrorView extends View
 {

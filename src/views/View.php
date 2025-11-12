@@ -1,6 +1,6 @@
 <?php
 
-namespace views;
+namespace PonyMVC\views;
 
 abstract class View
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace controllers;
+namespace PonyMVC\controllers;
 
 abstract class Controller
 {

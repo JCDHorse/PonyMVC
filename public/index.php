@@ -1,7 +1,10 @@
 <?php
 
-require_once __DIR__ . '/../src/core/loader.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
+/**
+ * TODO: Add logging, environment variables, etc.
+ */
 
 // Test database access
 $pdo = null;
@@ -17,15 +20,15 @@ catch (PDOException $e) {
     die(json_encode(array('outcome' => false, 'message' => $e->getMessage())));
 }
 
-\models\ModelFactory::init($pdo);
+\PonyMVC\models\ModelFactory::init($pdo);
 
 $url = $_GET['url'] ?? '/';
 $method = $_SERVER["REQUEST_METHOD"];
 
-$homeController = new \controllers\HomeController();
-$ponyController = new \controllers\PonyController();
+$homeController = new \PonyMVC\controllers\HomeController();
+$ponyController = new \PonyMVC\controllers\PonyController();
 
-$router = new \core\Router(new \controllers\ErrorController());
+$router = new \PonyMVC\core\Router(new \PonyMVC\controllers\ErrorController());
 $router->addRoute("GET", "/", [$homeController, 'getIndex']);
 $router->addRoute("GET", "/pony/{id}", [$ponyController, 'getPony']);
 $router->addRoute("POST", "/pony", [$ponyController, 'newPony']);
